@@ -52,31 +52,38 @@
 
 <script>
 import * as echarts from 'echarts'
+import { getDataAPI } from '@/api/user'
+
 export default {
   name: 'dashboard-page',
-  mounted () {
+  async created () {
     this.createLine()
   },
   methods: {
-    createLine () {
+    async createLine () {
+      const res = await getDataAPI()
+      console.log(res)
       const myChart = echarts.init(this.$refs.chartBox)
       const option = {
         xAxis: {
           type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          // data: ['星期一', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          data: res.data.list.map(item => item.ref_date)
         },
         yAxis: {
           type: 'value'
         },
         series: [
           {
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
-            type: 'line',
+            data: res.data.list.map(item => item.session_cnt),
+            type: 'bar',
             smooth: true
           }
-        ]
+        ],
+        tooltip: {
+          trigger: 'axis'
+        }
       }
-
       option && myChart.setOption(option)
     }
   }

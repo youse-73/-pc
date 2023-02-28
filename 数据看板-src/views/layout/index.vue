@@ -26,11 +26,12 @@
           <el-link :underline="false">{{ name }}</el-link>
         </div>
         <div class="logout">
-          <el-popconfirm title="您确认退出黑马面运营后台吗？">
+          <el-popconfirm title="您确认退出黑马面运营后台吗？" @click="loginOut">
             <i
               slot="reference"
               title="logout"
               class="el-icon-switch-button"
+              @click="loginOut"
             ></i>
           </el-popconfirm>
         </div>
@@ -56,6 +57,11 @@ export default {
     this.initData()
   },
   methods: {
+    loginOut () {
+      // localStorage.removeItem('mj-pc-token')
+      this.$store.commit('user/updateToken', '')
+      this.$router.push('/login')
+    },
     async initData () {
       const { data } = await userInfoAPI()
       this.avatar = data.avatar
