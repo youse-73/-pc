@@ -1,17 +1,19 @@
 import request from '@/utils/request'
 
-// 添加面经列表方法
+// 封装获取面经列表的方法
 export function articleListAPI (params) {
   return request({
     url: '/admin/interview/query',
     params: params
   })
 }
-// 添加面经方法
+
+// 添加面经的方法
 export function addArticleAPI (data) {
   return request.post('/admin/interview/create', data)
 }
-// 添加面经列表方法
+
+// 获取单个面经详情
 export function articleAPI (id) {
   return request({
     url: '/admin/interview/show',
@@ -24,6 +26,6 @@ export function updateArticleAPI (data) {
   return request({
     method: 'PUT',
     url: '/admin/interview/update',
-    data: data
+    data: data // { id, stem, content }
   })
 }

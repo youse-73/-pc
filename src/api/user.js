@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 封装登录的API
+// 封装登录的API方法
 export function loginAPI (data) {
   return request({
     method: 'POST',
@@ -8,13 +8,11 @@ export function loginAPI (data) {
     data: data
   })
 }
-
-// 获取登录人员相关信息
-export function userInfoAPI () {
-  return request.get('/auth/currentUser')
-}
-
-// 获取统计数据
+// 获取折线图使用数据
 export function getDataAPI () {
   return request.get('/analysis/DailyVisitTrend')
+}
+// 封装用户的API方法
+export function userInfoAPI () {
+  return request.get('/auth/currentUser')
 }
